@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+xmlns:c="http://java.sun.com/jsp/jstl/core"
+xmlns:f="http://java.sun.com/jsp/jstl/fmt" version="2.0">	
+<jsp:directive.page contentType="text/html; charset=UTF-8" 
+		pageEncoding="UTF-8" session="false"/>
+	<jsp:output doctype-root-element="html"
+		doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
+		doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+		omit-xml-declaration="true" />
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link rel="StyleSheet" href="res/mc.css" type="text/css" media="screen, print"/>
+	<script type="text/javascript" src="res/mc.js">;</script>
+	<link rel="StyleSheet" href="res/mc.css" type="text/css" title="cse4413"
+	media="screen, print" />
+	<title>Forgot User Name</title>
+</head>
+<body>
+<form action="" method="GET">
+<input type="hidden" name="page" value="1" />
+<table id="topPage">
+<tr><td>
+	<a href="/VENS/"><img id="logoImage" src="images/logo.gif" alt="logo image" title="Go to Home" /></a>
+	<table id="topTable">
+		<tr><td style="vertical-align: top;">
+			<div class="floatRight">
+			<c:if test="${not empty username}">
+					<a href="/VENS/myAccount">My Account</a> &#160;
+			</c:if>
+		<!-- ====================================== -->
+		<!-- ======  User has logged in =========== -->
+			<c:if test="${not empty username}">
+   				<a href="/VENS/Login?out=" onclick="return logOut()">Sign out</a> &#160;
+			</c:if>
+		<!-- ======  User has not logged in ======= -->
+			<c:if test="${empty username}">
+				<a href="/VENS/Login">Sign in</a> &#160;
+			</c:if>
+		<!-- ====================================== -->	
+		<!-- ====================================== -->	
+			<a href="/VENS/ShoppingCart">My Shopping Cart</a>
+			</div>
+		</td></tr>
+		<tr><td style="vertical-align: bottom;">
+      		<select id="searchList" name="searchList" onFocus="closeAdvanced(Advanced)">
+				<option value="all">All</option>
+   				<option value="title">Title</option>
+                <option value="author">Author</option>
+            </select>
+            <input id="searchText" name="searchText" type="text" placeholder="Enter Keyword" onFocus="closeAdvanced(Advanced)"/>
+            <button id="searchButton" type="submit"><img id="searchImage" src="images/search.png" title="Search"/></button>      
+		</td></tr>
+		<tr><td style="height:10px;">
+			<a href="" class="floatRight" onclick="return AdvancedSearch(Advanced)">Advanced Search</a>
+		</td></tr>
+	</table>
+</td></tr>
+<tr><td id="Advanced">
+	<!-- Through javascript, the content will be changed -->
+</td></tr>
+<tr style="padding: 0 0 5 0;"><td style="height: 30px; background-color: #b30000;">
+	<ul id="categoryTab" name="categoryTab">
+  		<li style="width: 30px; margin-left: 30px; margin-right: 30px;" title="Home"><a href="/VENS/"><img id="home" src="images/home.png" alt="Home" /></a></li>
+   		<li><a href="/VENS/AboutUs" >About Us</a></li>
+   		<li><a href="/VENS/ContactUs" >Contact Us</a></li>
+   		<!-- ====================================== -->
+		<!-- ======  User has logged in =========== -->
+			<c:if test="${not empty username}">
+   				<div>Hello, ${username} :)</div>
+			</c:if>
+		<!-- ======  User has not logged in ======= -->
+			<c:if test="${empty username}">
+				<div>Welcome!</div>
+			</c:if>
+		<!-- ====================================== -->	
+		<!-- ====================================== -->
+ 	</ul>
+ </td></tr>
+ </table>
+</form>
+ 
+ 
+<center>
+<form>
+<table cellpadding="10px">
+ <tr>
+	<td>Please confirm your information.</td>
+</tr>
+ <tr>
+	<td><label for="fname"><b>First name:</b></label></td>
+	<td><input name="fname" id="fname" type="text" onblur="check('fname','error3.1','error3')"/></td>
+	<td>
+		<p id="error3.1" style="color:red; display:none">First name should cannot be empty</p>
+		<p id="error3" style="color:red; display:none">First name should contain letters only</p></td>
+  </tr>
+  <tr>
+	<td><label for="lname"><b>Last name:</b></label></td>
+	<td><input name="lname" id="lname" type="text" onblur="check('lname','error4.1', 'error4')"/></td>
+	<td><p id="error4.1" style="color:red; display:none">Last name should not be empty</p>
+	<p id="error4" style="color:red; display:none">Last name should contain letters only</p></td>
+   </tr>
+ <tr>
+	<td><label for="postalCode"><b>Postal Code:</b></label></td>
+	<td><input name="postalCode" id="postalCode" type="text" onblur="user('postalCode','error1', 'error1.1')"/></td>
+	<td>
+		<p id="error1.1" style="color:red; display:none">Postal Code should not be empty</p>
+		<p id="error1" style="color:red; display:none">Postal Code should contain only letters and/or numbers</p>
+	</td>
+</tr>
+<tr><td id="username1" style="color: red">${username1}</td></tr>
+<tr> <td><input type="submit" name="Submit" value="Submit" id="Submit"/></td></tr>
+ </table>
+ </form>
+</center> 
+ 
+</body>
+</html>
+</jsp:root>

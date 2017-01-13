@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+xmlns:c="http://java.sun.com/jsp/jstl/core"
+xmlns:f="http://java.sun.com/jsp/jstl/fmt" version="2.0">	
+<jsp:directive.page contentType="text/html; charset=UTF-8" 
+		pageEncoding="UTF-8" session="false"/>
+	<jsp:output doctype-root-element="html"
+		doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
+		doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+		omit-xml-declaration="true" />
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<link rel="StyleSheet" href="res/mc.css" type="text/css" media="screen, print"/>
+	<script type="text/javascript" src="res/mc.js">;</script>
+	<title>Mom &amp;amp; Pop</title>
+</head>
+<body>
+
+<table id="topPage">
+<tr><td>
+	<a href="/VENS/"><img id="logoImage" src="images/logo.gif" alt="logo image" title="Go to Home" /></a>
+	<table id="topTable">
+		<tr><td style="vertical-align: top;">
+			<div class="floatRight">	
+   				<a href="/VENS/Login?out=" onclick="return logOut()">Sign out</a> &#160;
+			</div>
+		</td></tr>
+		<tr><td style="vertical-align: bottom;">
+      		<select id="searchList">
+				<option value="all">All</option>
+   				<option value="title">Title</option>
+                <option value="author">Author</option>
+            </select>
+            <input type="text" placeholder="Enter Keyword" id="searchText"/>
+            <button id="searchButton"><img id="searchImage" src="images/search.png" title="Search"/></button>      
+		</td></tr>
+		<tr><td style="height:10px;">
+			<a href="" class="floatRight" onclick="return false">Advanced Search</a>
+		</td></tr>
+	</table>
+</td></tr>
+<tr><td id="Advanced">
+	<!-- Through javascript, the content will be changed -->
+</td></tr>
+<tr style="padding: 0 0 5 0;"><td style="height: 30px; background-color: #b30000;">
+	<ul id="categoryTab" name="categoryTab">
+  		<li style="border-bottom: 5px solid #ffcccc; width: 30px; margin-left:10px;" title="Home"><a href="/VENS/"><img id="home" src="images/home.png" alt="Home" /></a></li>
+  		<li class="dropdown"><a href="" class="dropbtn">Categories</a>
+ 				 <div class="dropdown-content">
+   				 <a href="">Engineering</a>
+   				 <a href="">Fiction</a>
+   				 <a href="">History</a>
+   				 <a href="">Romance</a>
+   				 <a href="">Science</a>
+  				</div></li>
+   		<li><a href="" >About Us</a></li>
+   		<li><a href="" >Contact Us</a></li>
+   		<!-- ====================================== -->
+		<!-- ======  User has logged in =========== -->
+			<c:if test="${not empty username}">
+   				<div>Hello, ${username.getFirstName()} :)</div>
+			</c:if>
+		<!-- ======  User has not logged in ======= -->
+			<c:if test="${empty username}">
+				<div>Welcome!</div>
+			</c:if>
+		<!-- ====================================== -->	
+		<!-- ====================================== -->
+ 	</ul>
+ </td></tr>
+ </table>
+
+<!-- ///////////////////////// -->
+<form action="" method="GET">
+<input type="hidden" name="page" value="4" />
+
+	<h2 id= "customer"><center>Welcome Admin!</center></h2>
+	<center>
+	
+	<c:if test="${a eq '4' }">
+	<button type="submit" name="a" value="1">Generate Report1</button>  
+	<select name="month">
+		<option value="01">January</option>
+		<option value="02">February</option>
+          <option value="03">March</option>
+          <option value="04">April</option>
+          <option value="05">May</option>
+          <option value="06">June</option>
+          <option value="07">July</option>
+          <option value="08">August</option>
+          <option value="09">September</option>
+          <option value="10">October</option>
+          <option value="11">November</option>
+          <option value="12">December</option>
+    </select> <br />
+	</c:if>
+	
+	<c:if test="${a eq '1' }">
+	<b>Books Sold Each Month: ${month }</b> <br />
+	<table>
+	<tr>
+		<td bgcolor="lightgrey" style="width: 40%">PHOTO</td>
+		<td bgcolor="lightgrey" style="width: 10%">BID</td>
+		<td bgcolor="lightgrey" style="width: 40%">TITLE</td>
+		<td bgcolor="lightgrey" style="width: 10%">QUANTITY</td>
+	</tr>
+	${report }
+	</table>
+	</c:if>
+	
+	</center>
+	
+	<br />
+	<br />
+	
+</form>
+</body>
+</html>
+</jsp:root>

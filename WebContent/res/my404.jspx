@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+	<jsp:directive.page contentType="text/html; charset=UTF-8" 
+		pageEncoding="UTF-8" session="false"/>
+	<jsp:output doctype-root-element="html"
+		doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
+		doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+		omit-xml-declaration="true" />
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Error Page</title>
+</head>
+<body>
+<table cellspacing="10">
+<tr><a href="/VENS/"><img id="logoImage" src="images/logo.gif" alt="logo image" title="Go to Home" /></a></tr>
+<tr><p2> <center><b>The page could not be found</b></center></p2></tr>
+
+<tr>
+<p2> <BR/><center>The page you are looking for might have been removed,have the name changed or does not exist.</center> </p2>
+</tr> 
+<HR></HR>
+<tr><b>Please try the following:</b></tr><br/><br/>
+<tr>1.Make sure you are inputing the correct URL.</tr><br/><br/>
+<tr>2.Go back to your home page.</tr><br/><br/>
+<tr>3.Check your internet connection.</tr> <br/>
+
+ </table>
+	</body>
+</html>
+</jsp:root>

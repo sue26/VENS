@@ -1,0 +1,203 @@
+@CHARSET "UTF-8";
+
+body {
+	width: 97%;
+}
+button {
+	cursor: pointer;
+}
+#topPage {
+	width: 100%;
+}
+#logoImage {
+	float: left;
+	width: 230px;
+	height: 110px;
+	border: 20px solid white;
+	background-color: white;
+}
+#topTable {
+	height: 150px;
+	float: right;
+}
+#cartImage {
+	width: 70px;
+	height: 70px;
+	float: left;
+}
+#searchList {
+	font-size:20px;
+}
+#searchText {
+	font-size: 20px;
+	width: 350px;
+	height: 30px;
+	margin: 0px;
+	padding: 0px;
+	vertical-align: bottom;
+	border-top: 1px solid #a3a3c2;
+	border-left: 1px solid #a3a3c2;
+	border-bottom: 1px solid #a3a3c2;
+	border-right: none;
+}
+#searchButton {
+	width:36px;
+	height:32px;
+	vertical-align:bottom;
+	padding: 0px;
+	border-top: 1px solid #a3a3c2;
+	border-left: none;
+	border-bottom: 1px solid #a3a3c2;
+	border-right: 1px solid #a3a3c2;		
+	background: none;
+}
+
+#searchButton:hover:enabled > #searchImage {
+	background: #FAE9CE;
+	cursor:pointer;
+}
+#searchImage {
+	width: 36px;
+	height: 32px;
+	padding: 2px;
+	background-color: white;
+}
+#advancedSearch {
+	background: none;
+	width: 70px;
+	height: 50px;
+	padding: 0;
+}
+#advSearchImage {
+	background-color:white;
+	width: 50px;
+	height: 50px;
+}
+#advancedSearch:hover > #advSearchImage, #advancedSearch:hover  {
+	background: #FAE9CE;
+	cursor: pointer;
+}
+#categoryTab {
+	list-style:none;
+	display: inline;
+}
+#categoryTab li {
+	width: 25%;
+	float: left;
+	text-align: center;
+	font-family: arial-black;
+	height: 100%;
+	border: 5px solid #b30000;
+}
+#categoryTab div {
+	font-family: "Trebuchet MS", Helvetica, sans-serif;
+	color: white;
+	float: right;
+	font-size: 12px;
+	margin: 2px;
+	vertical-align: bottom;
+}
+#home {
+	width: 20px;
+	height: 20px;
+}
+#categoryTab li:hover {
+	border-bottom: 5px solid #ffcccc;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+#categoryTab a {
+	text-decoration: none;
+	color: white;
+}
+#bookSearchResult {	
+	width: 95%;
+}
+#bookSearchResult tr td {
+	border-bottom: 1px solid #ddd;
+}
+
+
+#book, #advanced {
+	padding: 10px;
+	border: 1px solid #999;
+	border: inset 1px solid #333;
+}
+#advanced {
+	float: right;
+	border-radius: 10px;
+	padding: 20px;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	margin: 0px 10px 10px 10px;
+}
+#upArrow {
+	padding: 0px;
+	float: right;
+}
+#books {
+	border-spacing: 20px;
+}
+#book_cover {
+	width:130px;
+	height:168px;
+}
+#rate-advanced {
+	width:89px;
+	height:14.4px;
+}
+#loginLabel {
+	text-align: center;
+	color: #FF0040;
+	font-size: 30px;
+}
+#username, #password, #password2 {
+	width: 200px;
+}
+
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f29190;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+.dropdown-content a {
+	width: 270px;
+	display: block;
+	text-align: center;
+    color: black;
+    padding: 12px 16px;
+}
+.dropdown-content a:hover {background-color: #f3e8de}
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.forgot {
+	font-size: 10px;
+	color: #424242;
+}
+.sideLabel {
+	font-family: Arial Black;
+    	color: #47476b;
+}
+.sideOption a{
+	margin-left: 10px;
+	margin-bottom: 10px;
+}
+.bookImage {
+ 	width: 200px;
+	height: 300px;
+ 	float: left;
+	padding: 10px;
+}
+.bookImage2 {
+	display:block; 
+	margin-left:auto; 
+	margin-right:auto; 
+	width:300px; 
+	height:450px;
+}
+.floatRight {
+	float: right;
+}

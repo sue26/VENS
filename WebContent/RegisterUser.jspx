@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+xmlns:c="http://java.sun.com/jsp/jstl/core"
+xmlns:f="http://java.sun.com/jsp/jstl/fmt" version="2.0">	
+<jsp:directive.page contentType="text/html; charset=UTF-8" 
+		pageEncoding="UTF-8" session="false"/>
+	<jsp:output doctype-root-element="html"
+		doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
+		doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+		omit-xml-declaration="true" />
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link rel="StyleSheet" href="res/mc.css" type="text/css" title="cse4413" media="screen, print" />
+<script type="text/javascript" src="res/mc.js">;</script>
+
+<title>Book Search Result Page</title>
+<style type="text/css">
+#pop {
+	height: 500px;
+	width: 600px;
+	bottom: 50%;
+	right: 50%;
+	border: 2px solid;
+	padding: 10px;
+	background: #FFFFFF;
+	border-radius: 9px;
+}
+
+#close {
+	right: 5;
+	top: 5;
+	float: right;
+}
+</style>
+</head>
+<body>
+<form action="" method="POST">
+<table id="topPage">
+<tr><td>
+	<a href="/VENS/"><img id="logoImage" src="images/logo.gif" alt="logo image" title="Go to Home" /></a>
+	<table id="topTable">
+		<tr><td style="vertical-align: top;">
+			<div class="floatRight">
+			<c:if test="${not empty username}">
+				<a href="/VENS/myAccount">My Account</a> &#160;
+			</c:if>
+		<!-- ====================================== -->
+		<!-- ======  User has logged in =========== -->
+			<c:if test="${not empty username}">
+   				<a href="/VENS/Login?out=" onclick="return logOut()">Sign out</a> &#160;
+			</c:if>
+		<!-- ======  User has not logged in ======= -->
+			<c:if test="${empty username}">
+				<a href="/VENS/Login">Sign in</a> &#160;
+			</c:if>
+		<!-- ====================================== -->	
+		<!-- ====================================== -->	
+			<a href="/VENS/ShoppingCart">My Shopping Cart</a>
+			</div>
+		</td></tr>
+		<tr><td style="vertical-align: bottom;">
+      		<select id="searchList" name="searchList" onFocus="closeAdvanced(Advanced)">
+				<option value="all">All</option>
+   				<option value="title">Title</option>
+                <option value="author">Author</option>
+            </select>
+            <input id="searchText" name="searchText" type="text" placeholder="Enter Keyword" onFocus="closeAdvanced(Advanced)"/>
+            <button id="searchButton" type="submit"><img id="searchImage" src="images/search.png" title="Search"/></button>      
+		</td></tr>
+		<tr><td style="height:10px;">
+			<a href="" class="floatRight" onclick="return AdvancedSearch(Advanced)">Advanced Search</a>
+		</td></tr>
+	</table>
+</td></tr>
+<tr><td id="Advanced">
+	<!-- Through javascript, the content will be changed -->
+</td></tr>
+<tr style="padding: 0 0 5 0;"><td style="height: 30px; background-color: #b30000;">
+	<ul id="categoryTab" name="categoryTab">
+  		<li style="width: 30px; margin-left: 10px;" title="Home"><a href="/VENS/"><img id="home" src="images/home.png" alt="Home" /></a></li>
+  		<li class="dropdown"><a href="/VENS/Category?a=all" class="dropbtn">Categories</a>
+ 				 <div class="dropdown-content">
+   				 <a href="/VENS/Category?a=engineering">Engineering</a>
+   				 <a href="/VENS/Category?a=fiction">Fiction</a>
+   				 <a href="/VENS/Category?a=history">History</a>
+   				 <a href="/VENS/Category?a=romance">Romance</a>
+   				 <a href="/VENS/Category?a=science">Science</a>
+  				</div></li>
+   		<li><a href="/VENS/AboutUs" >About Us</a></li>
+   		<li><a href="/VENS/ContactUs" >Contact Us</a></li>
+   		<!-- ====================================== -->
+		<!-- ======  User has logged in =========== -->
+			<c:if test="${not empty username}">
+   				<div>Hello, ${username.getFirstName()} :)</div>
+			</c:if>
+		<!-- ======  User has not logged in ======= -->
+			<c:if test="${empty username}">
+				<div>Welcome!</div>
+			</c:if>
+		<!-- ====================================== -->	
+		<!-- ====================================== -->
+ 	</ul>
+ </td></tr>
+ </table>
+ 
+		<table id="bottomTable" name="bottomTable">
+			<tr style="vertical-align: top;">
+
+
+				<td style="width: 100%;">
+
+
+
+					<table>
+						<tr>
+							<center>
+								<h3 id="first">Please fill out your information to
+									register:</h3>
+							</center>
+							<br />
+							<br />
+						</tr>
+
+
+
+						<tr>
+							<td><label for="username"><b>Username:</b></label></td>
+							<td><input name="username" id="username" type="text"
+								value="${username}" placeholder="username" /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+							<td><label for="password"><b>Password:</b></label></td>
+							<td><input name="password" id="password" type="password"
+								value="${password}" placeholder="password" /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+							<td><label for="password2"><b>Confirm Password:</b></label></td>
+							<td><input name="password2" id="password2" type="password"
+								value="${password2}" placeholder="repeat password" /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+
+
+
+						<tr>
+							<td><label for="fname"><b>First name:</b></label></td>
+							<td><input name="fname" id="fname" type="text"
+								value="${fname}" /></td>
+						</tr>
+						<tr>
+							<td></td>
+						</tr>
+
+						<tr>
+							<td><label for="lname"><b>Last name:</b></label></td>
+							<td><input name="lname" id="lname" type="text"
+								value="${lname}" /></td>
+						</tr>
+						<tr>
+							<td><label for="phonenumber"><b>Phone number:</b></label></td>
+							<td><input name="phonenumber" id="phonenumber" type="text"
+								value="${phonenumber}" /></td>
+						</tr>
+						<tr>
+							<td></td>
+						</tr>
+
+
+						<tr>
+							<td><label for="lname"><b>Mailing Address:</b></label></td>
+							<table>
+								<tr>
+									<td></td>
+								</tr>
+								<tr>
+									<td><label for="street"><b>Street:</b></label></td>
+								
+									<td><label for="province"><b>Province: </b></label></td>
+								</tr>
+
+								<tr>
+									<td><input name="street" id="street" type="text"
+										value="${street}" /></td>
+									<td><input name="province" id="province" type="text"
+										value="${province}" /></td>
+								</tr>
+
+								<tr>
+									<td><label for="city"><b>City</b></label></td>
+									<td><label for="country"><b>Country</b></label></td>
+									<td><label for="postalCode"><b>Postal Code</b></label></td>
+								</tr>
+
+								<tr>
+									<td><input name="city" id="city" type="text"
+										value="${city}" /></td>
+										<td><input name="country" id="country" type="text" value="${country}" /></td>
+									<!--  <td><select name="country" id="option">
+											<option value="Canada" id="option">Canada</option>
+											<option value="USA" id="option">USA</option>
+											<option value="other" id="option">Other</option>
+									</select></td> -->
+									<td><input name="postalCode" id="postalCode" type="text"
+										value="${postalCode}" /></td>
+									<td><input type="submit" name="Register" value="Register"
+										id="Register" /></td>
+								</tr>
+							</table>
+
+
+						</tr>
+
+
+
+
+					</table>
+
+
+
+
+				</td>
+			</tr>
+		</table>
+
+	</form>
+	
+<br></br>
+<hr></hr>
+	<center>
+	<a href="/VENS/AboutUs" id="about" name="about">About us</a>  &#160;
+	<a href="/VENS/ContactUs" id="contact" name="contact">Contact</a> &#160;
+	<a href="/VENS/Help" id="help" name="help" >Help</a>
+	</center>
+</body>
+</html>
+</jsp:root>

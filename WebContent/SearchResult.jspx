@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+xmlns:c="http://java.sun.com/jsp/jstl/core"
+xmlns:f="http://java.sun.com/jsp/jstl/fmt" version="2.0">	
+<jsp:directive.page contentType="text/html; charset=UTF-8" 
+		pageEncoding="UTF-8" session="false"/>
+	<jsp:output doctype-root-element="html"
+		doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
+		doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+		omit-xml-declaration="true" />
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Book Search Result Page</title>
+<link rel="StyleSheet" href="res/mc.css" type="text/css" title="cse4413" media="screen, print"/>
+<script type="text/javascript" src="res/mc.js">;</script>
+</head>
+<body>
+<form action="" method="GET">
+<input type="hidden" name="page" value="2" />
+<table id="topPage">
+<tr><td>
+	<a href="/VENS/"><img id="logoImage" src="images/logo.gif" alt="logo image" title="Go to Home" /></a>
+	<table id="topTable">
+		<tr><td style="vertical-align: top;">
+			<div class="floatRight">
+			<c:if test="${not empty username}">
+				<a href="/VENS/myAccount">My Account</a> &#160;
+			</c:if>
+		<!-- ====================================== -->
+		<!-- ======  User has logged in =========== -->
+			<c:if test="${not empty username}">
+   				<a href="/VENS/Login?out=" onclick="return logOut()">Sign out</a> &#160;
+			</c:if>
+		<!-- ======  User has not logged in ======= -->
+			<c:if test="${empty username}">
+				<a href="/VENS/Login">Sign in</a> &#160;
+			</c:if>
+		<!-- ====================================== -->	
+		<!-- ====================================== -->	
+			<a href="/VENS/ShoppingCart">My Shopping Cart</a>
+			</div>
+		</td></tr>
+		<tr><td style="vertical-align: bottom;">
+      		<select id="searchList" name="searchList" onFocus="closeAdvanced(Advanced)">
+      			<!-- Set the value drop down list to be consistent with the user input -->
+				<c:choose>
+				<c:when test="${searchBy eq 'all'}">
+					<option value="all" selected="">All</option>
+				</c:when>
+				<c:otherwise>
+					<option value="all">All</option>
+				</c:otherwise>
+				</c:choose>
+      			
+      			<c:choose>
+				<c:when test="${searchBy eq 'title'}">
+					<option value="title" selected="">Title</option>
+				</c:when>
+				<c:otherwise>
+					<option value="title">Title</option>
+				</c:otherwise>
+				</c:choose>
+      		
+      			<c:choose>
+				<c:when test="${searchBy eq 'author'}">
+					<option value="author" selected="">Author</option>
+				</c:when>
+				<c:otherwise>
+					<option value="author">Author</option>
+				</c:otherwise>
+				</c:choose>
+            </select>
+            	<c:choose>
+            	<c:when test="${advanced eq 'no'}">
+       	            <input id="searchText" name="searchText" type="text" placeholder="Enter Keyword" value="${keyword}" onFocus="closeAdvanced(Advanced)"/>
+            	</c:when>
+            	<c:otherwise>
+            		<input id="searchText" name="searchText" type="text" placeholder="Enter Keyword" onFocus="closeAdvanced(Advanced)"/>
+            	</c:otherwise>
+            	</c:choose>
+            <button id="searchButton" type="submit" ><img id="searchImage" src="images/search.png" title="" /></button>      
+		</td></tr>
+		<tr><td style="height:10px;">
+			<a href="" class="floatRight" onclick="return AdvancedSearch(Advanced)">Advanced Search</a>
+		</td></tr>
+	</table>
+</td></tr>
+<tr><td id="Advanced">
+	<!-- Through javascript, the content will be changed -->
+</td></tr>
+<tr style="padding: 0 0 5 0;"><td style="height: 30px; background-color: #b30000;">
+	<ul id="categoryTab" name="categoryTab">
+  		<li style="width: 30px; margin-left: 10px;" title="Home"><a href="/VENS/"><img id="home" src="images/home.png" alt="Home" /></a></li>
+  		<li class="dropdown"><a href="/VENS/Category?a=All" class="dropbtn">Categories</a>
+ 				 <div class="dropdown-content">
+   				 <a href="/VENS/Category?a=Engineering">Engineering</a>
+   				 <a href="/VENS/Category?a=Fiction">Fiction</a>
+   				 <a href="/VENS/Category?a=History">History</a>
+   				 <a href="/VENS/Category?a=Romance">Romance</a>
+   				 <a href="/VENS/Category?a=Science">Science</a>
+  				</div></li>
+   		<li><a href="/VENS/AboutUs">About Us</a></li>
+   		<li><a href="/VENS/ContactUs">Contact Us</a></li>
+   		<!-- ====================================== -->
+		<!-- ======  User has logged in =========== -->
+			<c:if test="${not empty username}">
+   				<div>Hello, ${username.getFirstName()} :)</div>
+			</c:if>
+		<!-- ======  User has not logged in ======= -->
+			<c:if test="${empty username}">
+				<div>Welcome!</div>
+			</c:if>
+		<!-- ====================================== -->	
+		<!-- ====================================== -->
+ 	</ul>
+ </td></tr>
+ </table>
+
+<table id="bottomTable" name="bottomTable">
+<tr style="vertical-align: top;">
+     <td rowspan="2" style="border-right: 2px dashed #ff9999; padding:20px; width: 150px;">
+         <div class="sideLabel">Category</div> 
+         <div class="sideOption">
+         	<a href="/VENS/?category=All">All</a> <br />
+            <a href="/VENS/?category=Science">Science</a> <br />
+            <a href="/VENS/?category=Fiction">Fiction</a> <br />
+            <a href="/VENS/?category=Engineering">Engineering</a> <br />
+            <a href="/VENS/?category=Romance">Romance</a> <br />
+            <a href="/VENS/?category=History">History</a> <br />
+            
+         </div>
+         <br />
+         <div class="sideLabel">Price Range</div>
+         <div class="sideOption">
+         	<a href="/VENS/?priceRange=All">All</a> <br />
+            <a href="/VENS/?priceRange=0-100">Below $100</a> <br />
+            <a href="/VENS/?priceRange=100-125">$100 - $125</a> <br />
+            <a href="/VENS/?priceRange=125-150">$125 - $150</a> <br />
+            <a href="/VENS/?priceRange=150-175">$150 - $175</a> <br />
+            <a href="/VENS/?priceRange=175-200">$175 - $200</a> <br />
+            <a href="/VENS/?priceRange=200-">Above $200</a> <br />
+         </div>
+     </td>
+     <td style="width: 75%;">
+    	<table id="bookSearchResult" cellspacing="10">
+    		<tr><td>
+    		Sort By: 
+    		<a href="/VENS/?sortBy=relevance">Relevance</a>&#160;
+    		<a href="/VENS/?sortBy=title">Title</a>&#160;
+    		<a href="/VENS/?sortBy=author">Author</a>&#160;
+    		<a href="/VENS/?sortBy=price">Price</a>&#160;
+    		</td></tr>
+    	${replace2}
+    	</table>
+	</td>
+</tr>
+</table>
+</form>
+
+
+<br></br>
+<hr></hr>
+	<center>
+	<a href="/VENS/AboutUs" id="about" name="about">About us</a>  &#160;
+	<a href="/VENS/ContactUs" id="contact" name="contact">Contact</a> &#160;
+	<a href="/VENS/Help" id="help" name="help" >Help</a>
+	</center>
+</body>
+</html>
+</jsp:root>

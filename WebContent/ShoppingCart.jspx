@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page"
+xmlns:c="http://java.sun.com/jsp/jstl/core"
+xmlns:f="http://java.sun.com/jsp/jstl/fmt" version="2.0">	
+<jsp:directive.page contentType="text/html; charset=UTF-8" 
+		pageEncoding="UTF-8" session="false"/>
+	<jsp:output doctype-root-element="html"
+		doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
+		doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+		omit-xml-declaration="true" />
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<link rel="StyleSheet" href="res/mc.css" type="text/css" media="screen, print"/>
+	<script type="text/javascript" src="res/mc.js">;</script>
+	<title>Shopping Cart</title>
+</head>
+
+<body>
+<form action="" method="GET">
+<input type="hidden" name="page" value="1" />
+<table id="topPage">
+<tr><td>
+	<a href="/VENS/"><img id="logoImage" src="images/logo.gif" alt="logo image" title="Go to Home" /></a>
+	<table id="topTable">
+		<tr><td style="vertical-align: top;">
+			<div class="floatRight">
+			<c:if test="${not empty username}">
+				<a href="/VENS/myAccount">My Account</a> &#160;
+			</c:if>
+		<!-- ====================================== -->
+		<!-- ======  User has logged in =========== -->
+			<c:if test="${not empty username}">
+   				<a href="/VENS/Login?out=" onclick="return logOut()">Sign out</a> &#160;
+			</c:if>
+		<!-- ======  User has not logged in ======= -->
+			<c:if test="${empty username}">
+				<a href="/VENS/Login">Sign in</a> &#160;
+			</c:if>
+		<!-- ====================================== -->	
+		<!-- ====================================== -->
+			<a href="/VENS/ShoppingCart">My Shopping Cart</a>
+			</div>
+		</td></tr>
+		<tr><td style="vertical-align: bottom;">
+      		<select id="searchList" name="searchList" onFocus="closeAdvanced(Advanced)">
+				<option value="all">All</option>
+   				<option value="title">Title</option>
+                <option value="author">Author</option>
+            </select>
+            <input id="searchText" name="searchText" type="text" placeholder="Enter Keyword" onFocus="closeAdvanced(Advanced)"/>
+            <button id="searchButton" type="submit"><img id="searchImage" src="images/search.png" title="Search"/></button>      
+		</td></tr>
+		<tr><td style="height:10px;">
+			<a href="" class="floatRight" onclick="return AdvancedSearch(Advanced)">Advanced Search</a>
+		</td></tr>
+	</table>
+</td></tr>
+<tr><td id="Advanced">
+	<!-- Through javascript, the content will be changed -->
+</td></tr>
+<tr style="padding: 0 0 5 0;"><td style="height: 30px; background-color: #b30000;">
+	<ul id="categoryTab" name="categoryTab">
+  		<li style="width: 30px; margin-left: 10px;" title="Home"><a href="/VENS/"><img id="home" src="images/home.png" alt="Home" /></a></li>
+  		<li class="dropdown"><a href="/VENS/Category?a=all" class="dropbtn">Categories</a>
+ 				 <div class="dropdown-content">
+   				 <a href="/VENS/Category?a=engineering">Engineering</a>
+   				 <a href="/VENS/Category?a=fiction">Fiction</a>
+   				 <a href="/VENS/Category?a=history">History</a>
+   				 <a href="/VENS/Category?a=romance">Romance</a>
+   				 <a href="/VENS/Category?a=science">Science</a>
+  				</div></li>
+   		<li><a href="/VENS/AboutUs" >About Us</a></li>
+   		<li><a href="/VENS/ContactUs" >Contact Us</a></li>
+   		<!-- ====================================== -->
+		<!-- ======  User has logged in =========== -->
+			<c:if test="${not empty username}">
+   				<div>Hello, ${username.getFirstName()} :)</div>
+			</c:if>
+		<!-- ======  User has not logged in ======= -->
+			<c:if test="${empty username}">
+				<div>Welcome!</div>
+			</c:if>
+		<!-- ====================================== -->	
+		<!-- ====================================== -->
+ 	</ul>
+ </td></tr>
+ </table>
+ 
+<center>
+<table id="bottomTable" name="bottomTable">
+<tr style="vertical-align: top;">
+  
+     <td style="width: 100%;">
+     
+
+    	
+			<c:choose>
+				<c:when test="${empty numberofitems}">
+					<h3>Shopping Cart (0 items)</h3>
+				</c:when>
+				<c:otherwise>
+					<h3>Shopping Cart (${numberofitems} items)</h3>
+				</c:otherwise>
+			</c:choose>
+
+
+			<table class="leftTable" border="0">
+
+				<c:choose>
+					<c:when test="${empty item}">
+						<TR>
+							<TD>
+								<p>Time to start filling it up! Need some inspiration ?</p>
+							</TD>
+						</TR>
+					</c:when>
+					<c:otherwise>
+
+
+						<td bgcolor="lightgrey">Image</td>
+						<td bgcolor="lightgrey">Title</td>
+						<td bgcolor="lightgrey">Quantity</td>
+						<td bgcolor="lightgrey">Item Price</td>
+
+
+						<c:forEach var="it" items="${item}">
+							<tr style="width: 85%;">
+								<td style="width:30%;"><img SRC="${it.bookPicture}" width="100"
+									height="100" /></td>
+								<td style="width: 30%;"><text id="name">${it.name}</text></td>
+								<td style="width: 30%;">
+								<font style="width: 10px">1</font>
+								<br /></td>
+								<td style="width: 30%;"><f:formatNumber type="currency">${it.price}</f:formatNumber></td>
+							</tr>
+						</c:forEach>
+
+					</c:otherwise>
+				</c:choose>
+
+			</table>
+
+
+
+
+			<TABLE class="rightTable" align="right">
+				<TR style="width: 20%;">
+					<TD><h5>Order Summary</h5>
+
+						<p>
+							Subtotal
+							<f:formatNumber type="currency">${cost}</f:formatNumber>
+						</p> 
+						<c:choose>
+							<c:when test="${empty item}">
+								<a href="/VENS/Purchase" onclick="return checkOut()">Checkout</a>
+							</c:when>
+							<c:otherwise>
+								<a href="/VENS/Purchase">Checkout</a>
+							</c:otherwise>
+						</c:choose>
+						</TD>
+			
+				</TR>
+
+			</TABLE>
+
+    	
+    	
+	</td>
+</tr>
+</table>
+</center>
+
+<br></br>
+<hr></hr>
+	<center>
+	<a href="/VENS/AboutUs" id="about" name="about">About us</a>  &#160;
+	<a href="/VENS/ContactUs" id="contact" name="contact">Contact</a> &#160;
+	<a href="/VENS/Help" id="help" name="help" >Help</a>
+	</center>
+	</form>
+</body>
+</html>
+</jsp:root>
